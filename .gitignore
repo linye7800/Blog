@@ -6,5 +6,6 @@ tmp/
 temp/
 dist/*
 node_modules/*
+node_modules/
 *.log
 package-lock.json
