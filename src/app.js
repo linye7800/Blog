@@ -6,7 +6,8 @@
 
 var express = require('express');
 var swig = require('swig');
-var mysql = require('mysql');
+import "reflect-metadata";
+import { createConnection } from "typeorm";
 
 // app => http services
 var app = express();
@@ -17,9 +18,13 @@ app.use('/public', express.static( __dirname + '/public'));
 // Front-end Back-end
 app.engine('html', swig.renderFile);
 
-app.set('views', './views');
+app.set('views', './views/main/');
 
 app.set('view engine', 'html');
+
+createConnection();
+
+app.listen(3000);
 
 swig.setDefaults({cache: false});
 
@@ -27,5 +32,4 @@ app.use('/admin', require('./routers/admin'));
 app.use('/api', require('./routers/api'));
 app.use('/', require('./routers/main'));
 
-//监听http请求
-app.listen('3000');
+
